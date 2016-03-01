@@ -40,7 +40,7 @@ gulp.task('buildJSProd', () => {
 });
 
 gulp.task('default', () => {
-    gulp.watch('src/sass/*.scss', ['sass']);
+    gulp.watch('src/scss/*.scss', ['sass']);
     gulp.watch('src/js/*.es6.js', ['buildJSDev']);
 });
 
