@@ -77,6 +77,16 @@ let SHUTTHEBOX = window.SHUTTHEBOX = {};
         return score;
     };
 
+    let returnWinner = () => {
+        let indexOfWinningPlayer = 0;
+        STB.state.players.forEach((player, index) => {
+            if (player.score < STB.state.players[indexOfWinningPlayer].score) {
+                indexOfWinningPlayer = index;
+            }
+        })
+        return indexOfWinningPlayer;
+    };
+
     STB.methods.setPlayers = numPlayers => {
         for (let i = 0; i < numPlayers; i++) {
             STB.state.players.push({
@@ -86,16 +96,9 @@ let SHUTTHEBOX = window.SHUTTHEBOX = {};
         }
     };
 
-    let returnWinner = () => {
-        let indexOfWinningPlayer = 0;
-        STB.state.players.forEach((player, index) => {
-            if (player.score < STB.state.players[indexOfWinningPlayer].score) {
-                indexOfWinningPlayer = index;
-            }
-        })
-        return indexOfWinningPlayer;
-    }
-
+    STB.methods.startGame = () => {
+        //TODO
+    };
 
     STB.methods.roll = () => {
         let die_one = randomNumGenerator();
@@ -107,7 +110,6 @@ let SHUTTHEBOX = window.SHUTTHEBOX = {};
         STB.state.dice = [die_one, die_two];
         return STB.state.dice;
     };
-
     //end turn and return winner if all players have gone, otherwise set up next turn
     STB.methods.endTurn = () => {
         let currentPlayer = STB.state.currentPlayer;
