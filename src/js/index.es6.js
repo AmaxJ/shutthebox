@@ -1,11 +1,13 @@
 let SHUTTHEBOX = window.SHUTTHEBOX = {};
 
-((STB, $) => {
-    STB.players = [];
-    STB.currentPlayer;
+((STB) => {
     STB.helpers = {};
     STB.methods = {};
     STB.state = {
+        players : [],
+        currentPlayer: null,
+        currentlySelectedTiles: [],
+        onlyTileOne : false,
         tiles: {
             "1": true,
             "2": true,
@@ -17,21 +19,22 @@ let SHUTTHEBOX = window.SHUTTHEBOX = {};
             "8": true,
             "9": true
         },
-        die: [1, 1]
+        dice: [1, 1]
     };
 
     STB.helpers.randomNumGenerator = () => {
         return Math.floor(Math.random() * 6) + 1;
     };
-
+    //If only the 1 tile is open, then the player only rolls one dice.
     STB.helpers.onlyTileOneOpen = () => {
+        if (STB.state.onlyTileOne) return;
         let onlyTileOne = true;
-        //check all tiles to see if tile 1 is the only one open
         STB.helpers.keys.forEach(tile => {
             if (tile !== "1" && STB.state.tiles[tile] === true) {
                 onlyTileOne = false;
             }
         });
+        STB.state.onlyTileOne = onlyTileOne;
         return onlyTileOne;
     };
 
@@ -46,43 +49,61 @@ let SHUTTHEBOX = window.SHUTTHEBOX = {};
         STB.helpers.keys.forEach(tile => {
             STB.state.tiles[tile] = true;
         });
+        STB.state.players = [];
+        STB.state.currentlySelected = [];
+        STB.state.currentPlayer = null;
     };
 
     STB.helpers.setPlayers = numPlayers => {
         for (let i = 0; i < numPlayers; i++) {
-            STB.players.push(0)
+            STB.state.players.push({
+                name : `Player ${i+1}`,
+                score : 0
+            });
         }
     };
 
     STB.helpers.returnWinner = () => {
-        let indexOfHighestScore = 0;
-        STB.players.forEach((playerScore, index) => {
-            if (playerScore > STB.players[indexOfHighestScore]) {
-                indexOfHighestScore = index;
+        let indexOfWinningPlayer = 0;
+        STB.state.players.forEach((player, index) => {
+            if (player.score > STB.state.players[indexOfWinningPlayer].score) {
+                indexOfWinningPlayer = index;
             }
         })
-        return index;
+        return indexOfWinningPlayer;
     }
 
     STB.helpers.keys = Object.keys(STB.state.tiles);
 
     STB.methods.roll = () => {
-        //TODO need to make this only do one
         let die_one = STB.helpers.randomNumGenerator();
+        if (STB.state.onlyTileOne) {
+            STB.state.dice = [die_one];
+            return STB.state.dice;
+        }
         let die_two = STB.helpers.randomNumGenerator();
-        STB.state.die = [die_one, die_two];
+        STB.state.dice = [die_one, die_two];
+        return STB.state.dice;
     };
 
-    STB.methods.validateTiles = (diceValue, tileArr) => {
-
-    };
 
 })(SHUTTHEBOX);
-console.log("hello");
-console.log(SHUTTHEBOX.helpers.getRemainingChoices(6, 3))
-console.log(SHUTTHEBOX.helpers.getRemainingChoices(9, 5))
-console.log(SHUTTHEBOX.helpers.getRemainingChoices(2, 0))
-console.log(SHUTTHEBOX.helpers.getRemainingChoices(10, 7))
+SHUTTHEBOX.helpers.setPlayers(3);
+// SHUTTHEBOX.state.onlyTileOne = true;
+// console.log("one die", SHUTTHEBOX.methods.roll());
+// console.log("one die", SHUTTHEBOX.methods.roll());
+// SHUTTHEBOX.state.onlyTileOne = false;
+// console.log("2 die", SHUTTHEBOX.methods.roll());
+// console.log("2 die", SHUTTHEBOX.methods.roll());
+// console.log(SHUTTHEBOX.state.players);
+// SHUTTHEBOX.state.players[0].score = 3;
+// SHUTTHEBOX.state.players[1].score = 5;
+// SHUTTHEBOX.state.players[0].score = 1;
+// console.log("Winner is: ", SHUTTHEBOX.helpers.returnWinner())
+// console.log(SHUTTHEBOX.helpers.getRemainingChoices(6, 3))
+// console.log(SHUTTHEBOX.helpers.getRemainingChoices(9, 5))
+// console.log(SHUTTHEBOX.helpers.getRemainingChoices(2, 0))
+// console.log(SHUTTHEBOX.helpers.getRemainingChoices(10, 7))
     /* rules:
     At the start of the game all levers or tiles are "open" (cleared, up), showing the numerals 1 to 9.
     During the game, each player plays in turn. A player begins his or her turn by throwing or rolling the die or dice into the box. If 1 is the only tile still open, the player may roll only one die. Otherwise, the player must roll both dice.
