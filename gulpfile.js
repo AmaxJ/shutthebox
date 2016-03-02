@@ -1,7 +1,6 @@
 'use strict'
 const gulp = require('gulp'),
     babel = require('gulp-babel'),
-    sourcemaps = require('gulp-sourcemaps'),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglify'),
     sass = require('gulp-sass'),
@@ -29,13 +28,11 @@ gulp.task('buildJSDev', () => {
 
 gulp.task('buildJSProd', () => {
     gulp.src('src/js/*.es6.js')
-        .pipe(sourcemaps.init())
         .pipe(babel({
             presets: ['es2015']
         }))
         .pipe(uglify())
         .pipe(concat('shutthebox.min.js'))
-        .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest('dist/js'));
 });
 
