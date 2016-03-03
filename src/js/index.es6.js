@@ -47,9 +47,7 @@
 
         $rollDice.on("click", event => {
             event.stopPropagation();
-            if ($tiles.hasClass("cannot-select")) {
-                $tiles.removeClass("cannot-select");
-            }
+            $tiles.removeClass("cannot-select");
             STB.methods.roll();
             shutTiles();
             $diceContainer.empty();
@@ -75,12 +73,8 @@
             $tiles.addClass("cannot-select");
             $tiles.children().each((index, tile) => {
                 let $currentTile = $(tile);
-                if ($currentTile.hasClass("cannot-select")) {
-                    $currentTile.removeClass("cannot-select");
-                }
-                if ($currentTile.hasClass("selected")) {
-                    $currentTile.removeClass("selected");
-                }
+                $currentTile.removeClass("cannot-select");
+                $currentTile.removeClass("selected");
             });
             $diceContainer.empty();
             cleanTiles();
