@@ -163,6 +163,7 @@ let SHUTTHEBOX = window.SHUTTHEBOX = {};
         }
         let die_two = randomNumGenerator();
         STB.state.dice = [die_one, die_two];
+        STB.state.selectableTiles = getRemainingChoices(getDiceTotal());
         return STB.state.dice;
     };
     //end turn and return winner if all players have gone, otherwise set up next turn

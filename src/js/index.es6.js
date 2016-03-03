@@ -52,6 +52,7 @@
                 $diceWrapper.append($dieVisual);
             });
             $diceContainer.prepend($diceWrapper);
+            showSelectableTiles();
         });
 
         $endTurn.on("click", event => {
@@ -85,7 +86,7 @@
         })
 
         function showSelectableTiles() {
-            console.log(STB.state.selectableTiles)
+            console.log("selectable tiles: ",STB.state.selectableTiles)
             $tiles.children().each((index, tile) => {
                 let $currentTile = $(tile);
                 let value = $currentTile.attr('data-value');
