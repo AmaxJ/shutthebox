@@ -31,7 +31,15 @@
         $tiles.on("click", event => {
             event.stopPropagation();
             let $tile = $(event.target);
-            if ($tile.hasClass("shut") || !STB.state.turnStarted) return;
+            let value = $tile.attr("data-value");
+            let isShut = $tile.hasClass("shut");
+            let notSelectable = $tile.hasClass("cannot-select");
+            if (isShut || !STB.state.turnStarted) {
+                return;
+            }
+            if (notSelectable && STB.state.currentlySelectedTiles.indexOf(value) === -1) {
+                return;
+            }
             STB.methods.pickTile($tile.attr('data-value'));
             showSelectableTiles();
             $tile.toggleClass("selected");
@@ -86,7 +94,7 @@
         })
 
         function showSelectableTiles() {
-            console.log("selectable tiles: ",STB.state.selectableTiles)
+            console.log("selectable tiles: ", STB.state.selectableTiles)
             $tiles.children().each((index, tile) => {
                 let $currentTile = $(tile);
                 let value = $currentTile.attr('data-value');
