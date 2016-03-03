@@ -72,7 +72,7 @@
             return STB.state.winner;
         }
         STB.state.currentPlayer = allPlayers[allPlayers.indexOf(currentPlayer) + 1];
-        STB.state.currentlySelected = [];
+        STB.state.currentlySelectedTiles = [];
         STB.state.onlyTileOne = false;
         STB.state.turnStarted = false;
         utils.resetTiles();
