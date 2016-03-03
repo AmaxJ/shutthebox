@@ -1,0 +1,43 @@
+#game {
+    margin-top: 50px;
+    text-align: center;
+
+    #game-board {
+        margin-top: 20px;
+        margin-right: 7%;
+        text-align: center;
+        display: inline-block;
+
+        #tiles {
+            margin-bottom: 10px;
+        }
+
+        #dice-container {
+            height: 60px;
+        }
+
+        @media screen and (max-width: $break-medium) {
+            display: block;
+            margin-right: 0px;
+        }
+    }
+
+    #players {
+        text-align: center;
+        margin-left: 7%;
+        display: inline-block;
+        vertical-align: top;
+        font-family: $secondaryFont;
+
+        h2 {
+            font-size: 2em;
+            font-family: $titleFont;
+            text-decoration: underline;
+        }
+
+        @media screen and (max-width: $break-medium) {
+            display: block;
+            margin-left: 0px;
+        }
+    }
+}

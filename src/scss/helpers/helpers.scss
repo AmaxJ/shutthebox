@@ -1,0 +1,28 @@
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+.hide {
+    visibility: hidden;
+}
+
+.cannot-select {
+    opacity: 0.5;
+}
+
+.selected {
+    border: 4px solid $charcoal;
+}
+
+.shut {
+    background: red;
+}
+
+.current-player {
+    color: $pink;
+    font-size: 1.6em;
+}

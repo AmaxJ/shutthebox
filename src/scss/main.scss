@@ -1,6 +1,9 @@
-@import "variables";
+@import "variables/variables";
+@import "components/components";
+@import "helpers/helpers";
+@import "startscreen/startscreen";
+@import "gamescreen/gamescreen";
 
-.number {
-    display: inline-block;
-    background: $blue;
+body {
+    background: $green;
 }

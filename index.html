@@ -7,31 +7,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Shut The Box</title>
     <link rel="stylesheet" type="text/css" href="node_modules/normalize.css/normalize.css">
+    <link href='https://fonts.googleapis.com/css?family=Bangers' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Candal' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="dist/css/style.css">
 </head>
 
 <body>
-    <section id="cards">
-        <div id="numbers">
-            <div class="number" data-value="1">1</div>
-            <div class="number" data-value="2">2</div>
-            <div class="number" data-value="3">3</div>
-            <div class="number" data-value="4">4</div>
-            <div class="number" data-value="5">5</div>
-            <div class="number" data-value="6">6</div>
-            <div class="number" data-value="7">7</div>
-            <div class="number" data-value="8">8</div>
-            <div class="number" data-value="9">9</div>
-        </div>
-        <button class="button" >End Turn</button>
+    <section class="start-screen">
+        <h1>Shut The Box!</h1>
+        <form>
+            <h2>Enter number of players:</h2>
+            <input class="input" type="text" id="num-players">
+            <div>
+                <button class="button btn-purple btn-bounce" id="start-game">Start</button>
+            </div>
+        </form>
     </section>
-    <section>
-        <div id="dice">
-            <div class="number"></div>
-            <div class="number">2</div>
+    <section id="game">
+        <div id="game-board">
+            <div id="tiles">
+                <div class="number" data-value="1">1</div>
+                <div class="number" data-value="2">2</div>
+                <div class="number" data-value="3">3</div>
+                <div class="number" data-value="4">4</div>
+                <div class="number" data-value="5">5</div>
+                <div class="number" data-value="6">6</div>
+                <div class="number" data-value="7">7</div>
+                <div class="number" data-value="8">8</div>
+                <div class="number" data-value="9">9</div>
+            </div>
+            <button class="button btn-sm btn-purple purple-hover" id="end-turn">End Turn</button>
+            <div id="dice">
+                <div id="dice-container"></div>
+                <button class="button btn-sm btn-purple purple-hover" id="roll-dice">Roll Dice</button>
+                <button class="button btn-sm btn-purple purple-hover" id="end-game">End Game</button>
+            </div>
         </div>
-        <button class="button" id="roll-dice">Roll Dice</button>
-        <button class="button" id="end-game">End Game</button>
+        <div id="players">
+            <h2>ScoreBoard</h2>
+            <div id="score-board">
+            </div>
+        </div>
     </section>
     <script src="node_modules/jquery/dist/jquery.js"></script>
     <script src="dist/js/shutthebox.js"></script>
