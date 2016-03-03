@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Shut The Box</title>
+    <link rel="stylesheet" type="text/css" href="node_modules/normalize.css/normalize.css">
+    <link href='https://fonts.googleapis.com/css?family=Bangers' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Candal' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="dist/css/style.css">
+</head>
+
+<body>
+    <section class="start-screen">
+        <h1>Shut The Box!</h1>
+        <form>
+            <h2>Enter number of players:</h2>
+            <input class="input" type="text" id="num-players">
+            <div>
+                <button class="button btn-purple btn-bounce" id="start-game">Start</button>
+            </div>
+        </form>
+        <div class="description">
+            <a href="https://en.wikipedia.org/wiki/Shut_the_Box"><h3>What is shut the box??</h3></a>
+        </div>
+    </section>
+    <section id="game">
+        <div id="game-board">
+            <div id="tiles">
+                <div class="number" data-value="1">1</div>
+                <div class="number" data-value="2">2</div>
+                <div class="number" data-value="3">3</div>
+                <div class="number" data-value="4">4</div>
+                <div class="number" data-value="5">5</div>
+                <div class="number" data-value="6">6</div>
+                <div class="number" data-value="7">7</div>
+                <div class="number" data-value="8">8</div>
+                <div class="number" data-value="9">9</div>
+            </div>
+            <button class="button btn-sm btn-purple purple-hover" id="end-turn">End Turn</button>
+            <div id="dice">
+                <div id="dice-container"></div>
+                <button class="button btn-sm btn-purple purple-hover" id="roll-dice">Roll Dice</button>
+                <button class="button btn-sm btn-purple purple-hover" id="end-game">End Game</button>
+            </div>
+            <div id="rules">
+                <h2>Rules!</h2>
+                <ul>
+                    <li> Roll the dice to start your turn.</li>
+                    <li> Select any combination of boxes that add up to your roll amount.</li>
+                    <li> Click roll again to lock in your selection.</li>
+                    <li> If you can't make your roll amount with the tiles left, your finished.</li>
+                    <li> Click end turn to pass to the next player!</li>
+                </ul>
+            </div>
+        </div>
+        <div id="players">
+            <h2>ScoreBoard</h2>
+            <div id="score-board">
+            </div>
+        </div>
+    </section>
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <script src="dist/js/shutthebox.min.js"></script>
+</body>
+
+</html>
