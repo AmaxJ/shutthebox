@@ -94,7 +94,6 @@
         })
 
         function showSelectableTiles() {
-            console.log("selectable tiles: ", STB.state.selectableTiles)
             $tiles.children().each((index, tile) => {
                 let $currentTile = $(tile);
                 let value = $currentTile.attr('data-value');
@@ -129,7 +128,6 @@
             let $scoreList = $("<div></div>");
             STB.state.players.forEach(player => {
                 let $playerEntry = $(`<h3>${player.name} - ${player.score}</h3>`);
-                console.log("player: ", player)
                 if (player === STB.state.currentPlayer) {
                     $playerEntry.addClass("current-player")
                 }
