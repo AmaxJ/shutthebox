@@ -11,8 +11,15 @@
 </head>
 
 <body>
-    <section id="cards">
-        <div id="numbers">
+    <section>
+        <form>
+            <label for="num-players">Number of Players</label>
+            <input type="text" id="num-players">
+            <button id="start-game">Start Game</button>
+        </form>
+    </section>
+    <section>
+        <div id="tiles">
             <div class="number" data-value="1">1</div>
             <div class="number" data-value="2">2</div>
             <div class="number" data-value="3">3</div>
@@ -23,12 +30,12 @@
             <div class="number" data-value="8">8</div>
             <div class="number" data-value="9">9</div>
         </div>
-        <button class="button" >End Turn</button>
+        <button class="button">End Turn</button>
     </section>
     <section>
         <div id="dice">
-            <div class="number"></div>
-            <div class="number">2</div>
+            <div class="number">1</div>
+            <div class="number">1</div>
         </div>
         <button class="button" id="roll-dice">Roll Dice</button>
         <button class="button" id="end-game">End Game</button>
