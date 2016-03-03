@@ -1,7 +1,6 @@
 'use strict'
 const gulp = require('gulp'),
     babel = require('gulp-babel'),
-    sourcemaps = require('gulp-sourcemaps'),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglify'),
     sass = require('gulp-sass'),
@@ -19,7 +18,7 @@ gulp.task('sass', () => {
 })
 
 gulp.task('buildJSDev', () => {
-    gulp.src('src/js/*.es6.js')
+    gulp.src(['src/js/shutthebox.es6.js', 'src/js/index.es6.js'])
         .pipe(babel({
             presets: ['es2015']
         }))
@@ -28,19 +27,17 @@ gulp.task('buildJSDev', () => {
 });
 
 gulp.task('buildJSProd', () => {
-    gulp.src('src/js/*.es6.js')
-        .pipe(sourcemaps.init())
+    gulp.src(['src/js/shutthebox.es6.js', 'src/js/index.es6.js'])
         .pipe(babel({
             presets: ['es2015']
         }))
         .pipe(uglify())
         .pipe(concat('shutthebox.min.js'))
-        .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest('dist/js'));
 });
 
 gulp.task('default', () => {
-    gulp.watch('src/sass/*.scss', ['sass']);
+    gulp.watch('src/scss/*.scss', ['sass']);
     gulp.watch('src/js/*.es6.js', ['buildJSDev']);
 });
 
