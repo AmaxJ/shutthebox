@@ -10,7 +10,11 @@
             $rollDice = $("#roll-dice"),
             $endTurn = $("#end-turn"),
             $endGame = $("#end-game"),
-            $scores = $("#score-board");
+            $scores = $("#score-board"),
+            $gameOverAlert = $("#game-over"),
+            $turnOverAlert = $("#turn-over"),
+            $invalidSelectAlert = $("#invalid-select"),
+            $invalidPlayers = $("#invalid-players");
 
         $document.on('submit', event => {
             event.preventDefault();
@@ -141,6 +145,11 @@
             cleanTiles();
             $diceContainer.empty();
             $gameContainer.addClass("hide");
+        }
+
+        function showAlert(selector, message) {
+            $overlay.show();
+            $(selector).slideDown()
         }
     })
 
