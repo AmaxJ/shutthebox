@@ -8,6 +8,7 @@
     vertical-align: middle;
     font-family: $titleFont;
     font-size: 2em;
+    border: 4px solid $lightBlue;
 }
 
 .input {
@@ -24,6 +25,7 @@
     font-family: $secondaryFont;
     font-size: 1.4em;
     padding: 10px;
+    margin-bottom: 6px;
 }
 
 .btn-sm{
@@ -39,11 +41,12 @@
 .btn-purple {
     color: white;
     background: $lighterPurple;
-    border: 2px solid $purple;
+    border: 4px solid $purple;
 }
 
 .purple-hover:hover {
     background: $purple;
+    border: 4px solid $lighterPurple;
 
 }
 

@@ -7,11 +7,14 @@
         margin-top: 20px;
         margin-right: 7%;
         text-align: center;
-        border: 1px solid red;
         display: inline-block;
 
         #tiles {
             margin-bottom: 10px;
+        }
+
+        #dice-container {
+            height: 60px;
         }
 
         @media screen and (max-width: $break-medium) {
@@ -23,9 +26,9 @@
     #players {
         text-align: center;
         margin-left: 7%;
-        border: 1px solid red;
         display: inline-block;
         vertical-align: top;
+        font-family: $secondaryFont;
 
         h2 {
             font-size: 2em;

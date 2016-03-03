@@ -7,7 +7,7 @@ let SHUTTHEBOX = window.SHUTTHEBOX = {};
         currentlySelectedTiles: [],
         selectableTiles: [],
         onlyTileOne: false,
-        turnStarted : false,
+        turnStarted: false,
         winner: null,
         tiles: {
             "1": true,
@@ -98,6 +98,7 @@ let SHUTTHEBOX = window.SHUTTHEBOX = {};
     };
 
     let validSelection = () => {
+        if (STB.state.currentlySelectedTiles.length === 0) return;
         let dieTotal = getDiceTotal();
         let selectionTotal = STB.state.currentlySelectedTiles
             .map(tile => parseInt(tile))
@@ -118,7 +119,9 @@ let SHUTTHEBOX = window.SHUTTHEBOX = {};
     };
 
     STB.methods.pickTile = tile => {
-        if (typeof tile !== "string") return;
+        if (typeof tile !== "string") {
+            return;
+        }
         let selectedTiles = STB.state.currentlySelectedTiles;
         let indexOfTile = selectedTiles.indexOf(tile);
         let diceTotal = getDiceTotal();
@@ -149,13 +152,14 @@ let SHUTTHEBOX = window.SHUTTHEBOX = {};
     STB.methods.roll = () => {
         if (!STB.state.turnStarted) {
             STB.state.turnStarted = true;
-        //only allow player to roll again if their last selection was valid
+            //only allow player to roll again if their last selection was valid
         } else if (!validSelection()) {
+            let diceTotal = getDiceTotal();
+            alert(`Your selected tiles must add up to ${diceTotal}!`);
             return;
         }
         shutTiles(STB.state.currentlySelectedTiles);
         STB.state.currentlySelectedTiles = [];
-        console.log("tiles after shut: ", STB.state.tiles)
         let die_one = randomNumGenerator();
         if (STB.state.onlyTileOne) {
             STB.state.dice = [die_one];
@@ -164,6 +168,7 @@ let SHUTTHEBOX = window.SHUTTHEBOX = {};
         let die_two = randomNumGenerator();
         STB.state.dice = [die_one, die_two];
         STB.state.selectableTiles = getRemainingChoices(getDiceTotal());
+        console.log("tiles in roll: ", STB.state.selectableTiles)
         return STB.state.dice;
     };
     //end turn and return winner if all players have gone, otherwise set up next turn
