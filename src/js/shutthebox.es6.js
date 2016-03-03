@@ -1,6 +1,6 @@
 let SHUTTHEBOX = window.SHUTTHEBOX = {};
 
-((STB) => {
+(STB => {
     STB.state = {
         players: [],
         currentPlayer: null,
@@ -73,13 +73,6 @@ let SHUTTHEBOX = window.SHUTTHEBOX = {};
         });
     };
 
-    let resetGame = () => {
-        resetTiles();
-        STB.state.players = [];
-        STB.state.currentlySelected = [];
-        STB.state.currentPlayer = null;
-        STB.state.onlyTileOne = false;
-    };
 
     let addOpenTiles = () => {
         let score = 0;
@@ -121,13 +114,18 @@ let SHUTTHEBOX = window.SHUTTHEBOX = {};
             selectedTiles.splice(indexOfTile, 1);
         }
         STB.state.selectableTiles = getRemainingChoices(diceTotal);
-        console.log('PICKTILE: currently selected: ', STB.state.currentlySelectedTiles);
-        console.log('PICKTILE: selectable', STB.state.selectableTiles);
-        return STB.state.selectableTiles;
     }
 
     STB.methods.startGame = () => {
         STB.state.currentPlayer = STB.state.players[0];
+    };
+
+    STB.methods.resetGame = () => {
+        resetTiles();
+        STB.state.players = [];
+        STB.state.currentlySelected = [];
+        STB.state.currentPlayer = null;
+        STB.state.onlyTileOne = false;
     };
 
     STB.methods.roll = () => {

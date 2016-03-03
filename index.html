@@ -11,34 +11,37 @@
 </head>
 
 <body>
-    <section>
+    <section id="start-game">
         <form>
             <label for="num-players">Number of Players</label>
             <input type="text" id="num-players">
             <button id="start-game">Start Game</button>
         </form>
     </section>
-    <section>
-        <div id="tiles">
-            <div class="number" data-value="1">1</div>
-            <div class="number" data-value="2">2</div>
-            <div class="number" data-value="3">3</div>
-            <div class="number" data-value="4">4</div>
-            <div class="number" data-value="5">5</div>
-            <div class="number" data-value="6">6</div>
-            <div class="number" data-value="7">7</div>
-            <div class="number" data-value="8">8</div>
-            <div class="number" data-value="9">9</div>
+    <section id="game" class="hide">
+        <div id="gameBoard">
+            <div id="tiles">
+                <div class="number" data-value="1">1</div>
+                <div class="number" data-value="2">2</div>
+                <div class="number" data-value="3">3</div>
+                <div class="number" data-value="4">4</div>
+                <div class="number" data-value="5">5</div>
+                <div class="number" data-value="6">6</div>
+                <div class="number" data-value="7">7</div>
+                <div class="number" data-value="8">8</div>
+                <div class="number" data-value="9">9</div>
+            </div>
+            <button class="button" id="end-turn">End Turn</button>
+            <div id="dice">
+                <div id="dice-container"></div>
+                <button class="button" id="roll-dice">Roll Dice</button>
+                <button class="button" id="end-game">End Game</button>
+            </div>
         </div>
-        <button class="button">End Turn</button>
-    </section>
-    <section>
-        <div id="dice">
-            <div class="number">1</div>
-            <div class="number">1</div>
+        <div id="score-board">
+            <h3>ScoreBoard</h3>
+            <ul id="scores"></ul>
         </div>
-        <button class="button" id="roll-dice">Roll Dice</button>
-        <button class="button" id="end-game">End Game</button>
     </section>
     <script src="node_modules/jquery/dist/jquery.js"></script>
     <script src="dist/js/shutthebox.js"></script>
