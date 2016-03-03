@@ -69,6 +69,7 @@
         currentPlayer.score = utils.addOpenTiles();
         if (allPlayers.indexOf(currentPlayer) === allPlayers.length - 1) {
             STB.state.winner = utils.returnWinner();
+            STB.state.currentlySelectedTiles = [];
             return STB.state.winner;
         }
         STB.state.currentPlayer = allPlayers[allPlayers.indexOf(currentPlayer) + 1];
