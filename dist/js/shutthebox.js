@@ -191,7 +191,7 @@ var SHUTTHEBOX = window.SHUTTHEBOX = {};
             return STB.state.winner;
         }
         STB.state.currentPlayer = allPlayers[allPlayers.indexOf(currentPlayer) + 1];
-        STB.state.currentlySelected = [];
+        STB.state.currentlySelectedTiles = [];
         STB.state.onlyTileOne = false;
         STB.state.turnStarted = false;
         utils.resetTiles();
@@ -203,16 +203,16 @@ var SHUTTHEBOX = window.SHUTTHEBOX = {};
 (function (STB, $) {
 
     $(function () {
-        var $document = $(document),
-            $input = $("#num-players"),
-            $startScreen = $(".start-screen"),
-            $gameContainer = $("#game"),
-            $tiles = $("#tiles"),
-            $diceContainer = $("#dice-container"),
-            $rollDice = $("#roll-dice"),
-            $endTurn = $("#end-turn"),
-            $endGame = $("#end-game"),
-            $scores = $("#score-board");
+        var $document = $(document);
+        var $input = $("#num-players");
+        var $startScreen = $(".start-screen");
+        var $gameContainer = $("#game");
+        var $tiles = $("#tiles");
+        var $diceContainer = $("#dice-container");
+        var $rollDice = $("#roll-dice");
+        var $endTurn = $("#end-turn");
+        var $endGame = $("#end-game");
+        var $scores = $("#score-board");
 
         $document.on('submit', function (event) {
             event.preventDefault();
@@ -249,9 +249,7 @@ var SHUTTHEBOX = window.SHUTTHEBOX = {};
 
         $rollDice.on("click", function (event) {
             event.stopPropagation();
-            if ($tiles.hasClass("cannot-select")) {
-                $tiles.removeClass("cannot-select");
-            }
+            $tiles.removeClass("cannot-select");
             STB.methods.roll();
             shutTiles();
             $diceContainer.empty();
@@ -277,12 +275,8 @@ var SHUTTHEBOX = window.SHUTTHEBOX = {};
             $tiles.addClass("cannot-select");
             $tiles.children().each(function (index, tile) {
                 var $currentTile = $(tile);
-                if ($currentTile.hasClass("cannot-select")) {
-                    $currentTile.removeClass("cannot-select");
-                }
-                if ($currentTile.hasClass("selected")) {
-                    $currentTile.removeClass("selected");
-                }
+                $currentTile.removeClass("cannot-select");
+                $currentTile.removeClass("selected");
             });
             $diceContainer.empty();
             cleanTiles();
