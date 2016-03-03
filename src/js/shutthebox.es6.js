@@ -94,7 +94,7 @@ let SHUTTHEBOX = window.SHUTTHEBOX = {};
                 indexOfWinningPlayer = index;
             }
         })
-        return indexOfWinningPlayer;
+        return STB.state.players[indexOfWinningPlayer];
     };
 
     let validSelection = () => {
@@ -132,6 +132,7 @@ let SHUTTHEBOX = window.SHUTTHEBOX = {};
     }
 
     STB.methods.startGame = () => {
+        resetTiles();
         STB.state.currentPlayer = STB.state.players[0];
     };
 
@@ -141,6 +142,8 @@ let SHUTTHEBOX = window.SHUTTHEBOX = {};
         STB.state.currentlySelected = [];
         STB.state.currentPlayer = null;
         STB.state.onlyTileOne = false;
+        STB.state.winner = null;
+        STB.state.turnStarted = false;
     };
     //On the roll is when we lock in the selection from the last roll
     STB.methods.roll = () => {

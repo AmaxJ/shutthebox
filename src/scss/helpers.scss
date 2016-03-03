@@ -1,14 +1,7 @@
 @import "variables";
 
-.number {
-    display: inline-block;
-    height: 50px;
-    width: 50px;
-    background: $blue;
-}
-
 .hide {
-    display: none;
+    visibility: hidden;
 }
 
 .cannot-select {

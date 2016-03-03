@@ -3,7 +3,7 @@
     $(() => {
         const $document = $(document),
             $input = $("#num-players"),
-            $startScreen = $("#start-game"),
+            $startScreen = $(".start-screen"),
             $gameContainer = $("#game"),
             $tiles = $("#tiles"),
             $diceContainer = $("#dice-container"),
@@ -23,7 +23,7 @@
             STB.methods.setPlayers(numPlayers);
             STB.methods.startGame();
             $tiles.addClass("cannot-select");
-            $startScreen.addClass("hide");
+            $startScreen.addClass("slide-down");
             $gameContainer.removeClass("hide");
             updateLeaderBoard();
         });
@@ -57,13 +57,19 @@
         $endTurn.on("click", event => {
             event.stopPropagation();
             STB.methods.endTurn();
+            if (STB.state.winner !== null) {
+                updateLeaderBoard();
+                alert(`${STB.state.winner.name} is the winner!`);
+                reset();
+                $startScreen.removeClass("slide-down");
+            }
             $tiles.addClass("cannot-select");
             $tiles.children().each((index, tile) => {
                 let $currentTile = $(tile);
-                if ($currentTile.hasClass("cannot-select")){
+                if ($currentTile.hasClass("cannot-select")) {
                     $currentTile.removeClass("cannot-select");
                 }
-                if ($currentTile.hasClass("selected")){
+                if ($currentTile.hasClass("selected")) {
                     $currentTile.removeClass("selected");
                 }
             });
@@ -74,9 +80,8 @@
 
         $endGame.on("click", event => {
             event.stopPropagation();
-            STB.methods.resetGame();
-            $startScreen.removeClass("hide");
-            $gameContainer.addClass("hide");
+            reset();
+            $startScreen.removeClass("slide-down");
         })
 
         function showSelectableTiles() {
@@ -93,21 +98,21 @@
         }
 
         function shutTiles() {
-           $tiles.children().each((index, tile) => {
+            $tiles.children().each((index, tile) => {
                 let $currentTile = $(tile);
                 let value = $currentTile.attr('data-value');
                 if (!STB.state.tiles[value]) {
                     $currentTile.addClass("shut");
                 }
-           });
+            });
         }
 
         function cleanTiles() {
-           $tiles.children().each((index, tile) => {
+            $tiles.children().each((index, tile) => {
                 let $currentTile = $(tile);
                 $currentTile.removeClass();
                 $currentTile.addClass("number");
-           });
+            });
         }
 
         function updateLeaderBoard() {
@@ -117,6 +122,13 @@
                 $scoreList.append($(`<li>${player.name} - ${player.score}</li>`));
             })
             $scores.append($scoreList);
+        }
+
+        function reset() {
+            STB.methods.resetGame();
+            cleanTiles();
+            $diceContainer.empty();
+            $gameContainer.addClass("hide");
         }
     })
 

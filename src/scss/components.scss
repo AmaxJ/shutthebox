@@ -1,0 +1,80 @@
+@import "variables";
+.number {
+    display: inline-block;
+    font-family: $titleFont;
+    color: black;
+    height: 50px;
+    width: 50px;
+    background: $blue;
+    span {
+        display: inline-block;
+        vertical-align: center;
+    }
+}
+
+.input {
+    height: 30px;
+    width: 50px;
+    font-family: $secondaryFont;
+    text-align: center;
+}
+
+
+/*-------------------Buttons---------------------*/
+
+.button {
+    background: $green;
+    font-family: $secondaryFont;
+    font-size: 1.4em;
+    padding: 10px;
+    &:hover {
+        animation: bounce 0.7s ease-in-out;
+    }
+}
+
+.btn-green {
+    background: $green;
+    border: 2px solid $purple;
+}
+
+.btn-purple {
+    color: white;
+    background: $lighterPurple;
+    border: 2px solid $purple;
+}
+
+@keyframes bounce {
+    0% {
+        transform: scale(1.0);
+    }
+    10% {
+        transform: scale(1.2);
+    }
+    20% {
+        transform: scale(1.3);
+    }
+    30% {
+        transform: scale(1.2);
+    }
+    40% {
+        transform: scale(1.0);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    60% {
+        transform: scale(1.0);
+    }
+    70% {
+        transform: scale(1.05);
+    }
+    80% {
+        transform: scale(1.0);
+    }
+    90% {
+        transform: scale(1.02);
+    }
+    100% {
+        transform: scale(1.0);
+    }
+}

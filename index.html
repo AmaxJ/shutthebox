@@ -7,29 +7,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Shut The Box</title>
     <link rel="stylesheet" type="text/css" href="node_modules/normalize.css/normalize.css">
+    <link href='https://fonts.googleapis.com/css?family=Bangers' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Candal' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="dist/css/style.css">
 </head>
 
 <body>
-    <section id="start-game">
+    <section class="start-screen">
+        <h1>Shut The Box!</h1>
         <form>
-            <label for="num-players">Number of Players</label>
-            <input type="text" id="num-players">
-            <button id="start-game">Start Game</button>
+            <h2>Enter number of players:</h2>
+            <input class="input" type="text" id="num-players">
+            <div>
+                <button class="button btn-purple" id="start-game">Start</button>
+            </div>
         </form>
     </section>
-    <section id="game" class="hide">
+    <section id="game">
         <div id="gameBoard">
             <div id="tiles">
-                <div class="number" data-value="1">1</div>
-                <div class="number" data-value="2">2</div>
-                <div class="number" data-value="3">3</div>
-                <div class="number" data-value="4">4</div>
-                <div class="number" data-value="5">5</div>
-                <div class="number" data-value="6">6</div>
-                <div class="number" data-value="7">7</div>
-                <div class="number" data-value="8">8</div>
-                <div class="number" data-value="9">9</div>
+                <div class="number" data-value="1"><span>1</span></div>
+                <div class="number" data-value="2"><span>2</span></div>
+                <div class="number" data-value="3"><span>3</span></div>
+                <div class="number" data-value="4"><span>4</span></div>
+                <div class="number" data-value="5"><span>5</span></div>
+                <div class="number" data-value="6"><span>6</span></div>
+                <div class="number" data-value="7"><span>7</span></div>
+                <div class="number" data-value="8"><span>8</span></div>
+                <div class="number" data-value="9"><span>9</span></div>
             </div>
             <button class="button" id="end-turn">End Turn</button>
             <div id="dice">
