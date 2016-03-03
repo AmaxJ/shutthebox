@@ -67,16 +67,15 @@
         let currentPlayer = STB.state.currentPlayer;
         let allPlayers = STB.state.players;
         currentPlayer.score = utils.addOpenTiles();
+        utils.resetTiles();
+        STB.state.currentlySelectedTiles = [];
         if (allPlayers.indexOf(currentPlayer) === allPlayers.length - 1) {
             STB.state.winner = utils.returnWinner();
-            STB.state.currentlySelectedTiles = [];
             return STB.state.winner;
         }
         STB.state.currentPlayer = allPlayers[allPlayers.indexOf(currentPlayer) + 1];
-        STB.state.currentlySelectedTiles = [];
         STB.state.onlyTileOne = false;
         STB.state.turnStarted = false;
-        utils.resetTiles();
         alert(`End of turn for ${currentPlayer.name}! Next up ${STB.state.currentPlayer.name}!`)
     };
 })(SHUTTHEBOX);
