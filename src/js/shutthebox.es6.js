@@ -7,6 +7,7 @@ let SHUTTHEBOX = window.SHUTTHEBOX = {};
         currentlySelectedTiles: [],
         selectableTiles: [],
         onlyTileOne: false,
+        turnStarted : false,
         winner: null,
         tiles: {
             "1": true,
@@ -52,6 +53,7 @@ let SHUTTHEBOX = window.SHUTTHEBOX = {};
     };
 
     let getRemainingChoices = (dieTotal) => {
+        console.log("Die total: ", dieTotal);
         let selectedTiles = STB.state.currentlySelectedTiles;
         let selectedAmt;
         if (selectedTiles.length === 0) {
@@ -62,6 +64,7 @@ let SHUTTHEBOX = window.SHUTTHEBOX = {};
                 .reduce((a, b) => a + b);
         }
         let difference = dieTotal - selectedAmt;
+        console.log("difference: ", difference);
         return STB.helpers.keys.filter(tile => {
             return STB.state.tiles[tile] && parseInt(tile) <= difference && selectedTiles.indexOf(tile) === -1;
         });
@@ -94,6 +97,17 @@ let SHUTTHEBOX = window.SHUTTHEBOX = {};
         return indexOfWinningPlayer;
     };
 
+    let validSelection = () => {
+        let dieTotal = getDiceTotal();
+        let selectionTotal = STB.state.currentlySelectedTiles
+            .map(tile => parseInt(tile))
+            .reduce((a, b) => a + b);
+        console.log("validSelection()")
+        console.log("dieTotal: ", dieTotal);
+        console.log("selectionTotal", selectionTotal);
+        return dieTotal === selectionTotal;
+    };
+
     STB.methods.setPlayers = numPlayers => {
         for (let i = 0; i < numPlayers; i++) {
             STB.state.players.push({
@@ -114,6 +128,7 @@ let SHUTTHEBOX = window.SHUTTHEBOX = {};
             selectedTiles.splice(indexOfTile, 1);
         }
         STB.state.selectableTiles = getRemainingChoices(diceTotal);
+        console.log(selectedTiles);
     }
 
     STB.methods.startGame = () => {
@@ -127,8 +142,17 @@ let SHUTTHEBOX = window.SHUTTHEBOX = {};
         STB.state.currentPlayer = null;
         STB.state.onlyTileOne = false;
     };
-
+    //On the roll is when we lock in the selection from the last roll
     STB.methods.roll = () => {
+        if (!STB.state.turnStarted) {
+            STB.state.turnStarted = true;
+        //only allow player to roll again if their last selection was valid
+        } else if (!validSelection()) {
+            return;
+        }
+        shutTiles(STB.state.currentlySelectedTiles);
+        STB.state.currentlySelectedTiles = [];
+        console.log("tiles after shut: ", STB.state.tiles)
         let die_one = randomNumGenerator();
         if (STB.state.onlyTileOne) {
             STB.state.dice = [die_one];
@@ -142,7 +166,6 @@ let SHUTTHEBOX = window.SHUTTHEBOX = {};
     STB.methods.endTurn = () => {
         let currentPlayer = STB.state.currentPlayer;
         let allPlayers = STB.state.players;
-        shutTiles(STB.state.currentlySelectedTiles);
         currentPlayer.score = addOpenTiles();
         if (allPlayers.indexOf(currentPlayer) === allPlayers.length - 1) {
             STB.state.winner = returnWinner();
@@ -151,6 +174,7 @@ let SHUTTHEBOX = window.SHUTTHEBOX = {};
         STB.state.currentPlayer = allPlayers[allPlayers.indexOf(currentPlayer) + 1];
         STB.state.currentlySelected = [];
         STB.state.onlyTileOne = false;
+        STB.state.turnStarted = false;
         resetTiles();
     };
 
