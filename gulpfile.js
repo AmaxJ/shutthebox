@@ -18,7 +18,7 @@ gulp.task('sass', () => {
 })
 
 gulp.task('buildJSDev', () => {
-    gulp.src('src/js/*.es6.js')
+    gulp.src(['src/js/shutthebox.es6.js', 'src/js/index.es6.js'])
         .pipe(babel({
             presets: ['es2015']
         }))
@@ -27,7 +27,7 @@ gulp.task('buildJSDev', () => {
 });
 
 gulp.task('buildJSProd', () => {
-    gulp.src('src/js/*.es6.js')
+    gulp.src(['src/js/shutthebox.es6.js', 'src/js/index.es6.js'])
         .pipe(babel({
             presets: ['es2015']
         }))
