@@ -24,27 +24,29 @@
         </form>
     </section>
     <section id="game">
-        <div id="gameBoard">
+        <div id="game-board">
             <div id="tiles">
-                <div class="number" data-value="1"><span>1</span></div>
-                <div class="number" data-value="2"><span>2</span></div>
-                <div class="number" data-value="3"><span>3</span></div>
-                <div class="number" data-value="4"><span>4</span></div>
-                <div class="number" data-value="5"><span>5</span></div>
-                <div class="number" data-value="6"><span>6</span></div>
-                <div class="number" data-value="7"><span>7</span></div>
-                <div class="number" data-value="8"><span>8</span></div>
-                <div class="number" data-value="9"><span>9</span></div>
+                <div class="number" data-value="1">1</div>
+                <div class="number" data-value="2">2</div>
+                <div class="number" data-value="3">3</div>
+                <div class="number" data-value="4">4</div>
+                <div class="number" data-value="5">5</div>
+                <div class="number" data-value="6">6</div>
+                <div class="number" data-value="7">7</div>
+                <div class="number" data-value="8">8</div>
+                <div class="number" data-value="9">9</div>
             </div>
-            <button class="button" id="end-turn">End Turn</button>
+            <button class="button btn-sm btn-purple purple-hover" id="end-turn">End Turn</button>
             <div id="dice">
                 <div id="dice-container"></div>
-                <button class="button" id="roll-dice">Roll Dice</button>
-                <button class="button" id="end-game">End Game</button>
+                <button class="button btn-sm btn-purple purple-hover" id="roll-dice">Roll Dice</button>
+                <button class="button btn-sm btn-purple purple-hover" id="end-game">End Game</button>
             </div>
         </div>
-        <div id="score-board">
-            <h3>ScoreBoard</h3>
+        <div id="players">
+            <h2>ScoreBoard</h2>
+            <div id="score-board">
+            </div>
         </div>
     </section>
     <script src="node_modules/jquery/dist/jquery.js"></script>

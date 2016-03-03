@@ -180,6 +180,7 @@ let SHUTTHEBOX = window.SHUTTHEBOX = {};
         STB.state.onlyTileOne = false;
         STB.state.turnStarted = false;
         resetTiles();
+        alert(`End of turn for ${currentPlayer.name}! Next up ${STB.state.currentPlayer.name}!`)
     };
 
 })(SHUTTHEBOX);

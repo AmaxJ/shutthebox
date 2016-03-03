@@ -1,0 +1,41 @@
+#game {
+    margin-top: 50px;
+    text-align: center;
+    border: 1px solid red;
+
+    #game-board {
+        margin-top: 20px;
+        margin-right: 7%;
+        text-align: center;
+        border: 1px solid red;
+        display: inline-block;
+
+        #tiles {
+            margin-bottom: 10px;
+        }
+
+        @media screen and (max-width: $break-medium) {
+            display: block;
+            margin-right: 0px;
+        }
+    }
+
+    #players {
+        text-align: center;
+        margin-left: 7%;
+        border: 1px solid red;
+        display: inline-block;
+        vertical-align: top;
+
+        h2 {
+            font-size: 2em;
+            font-family: $titleFont;
+            text-decoration: underline;
+        }
+
+        @media screen and (max-width: $break-medium) {
+            display: block;
+            margin-left: 0px;
+        }
+    }
+}

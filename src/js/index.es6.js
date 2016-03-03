@@ -118,9 +118,14 @@
 
         function updateLeaderBoard() {
             $scores.empty();
-            let $scoreList = $("<ul></ul>");
+            let $scoreList = $("<div></div>");
             STB.state.players.forEach(player => {
-                $scoreList.append($(`<li>${player.name} - ${player.score}</li>`));
+                let $playerEntry = $(`<h3>${player.name} - ${player.score}</h3>`);
+                console.log("player: ", player)
+                if (player === STB.state.currentPlayer) {
+                    $playerEntry.addClass("current-player")
+                }
+                $scoreList.append($playerEntry);
             })
             $scores.append($scoreList);
         }

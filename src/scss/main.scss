@@ -1,7 +1,8 @@
-@import "components";
-@import "helpers";
-@import "startscreen";
-@import "gamescreen";
+@import "variables/variables";
+@import "components/components";
+@import "helpers/helpers";
+@import "startscreen/startscreen";
+@import "gamescreen/gamescreen";
 
 body {
     background: $green;

@@ -1,4 +1,10 @@
-@import "variables";
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
 
 .hide {
     visibility: hidden;
@@ -14,4 +20,8 @@
 
 .shut {
     background: red;
+}
+
+.current-player {
+    text-decoration: underline;
 }
