@@ -3,8 +3,8 @@
 Shut the Box, also called Canoga, Klackers, Zoltan Box, Batten Down the Hatches, Jackpot or High Rollers, is a game of dice for one or more players, commonly played in a group of two to four for stakes.
 
 ##Images
-![Landing](https://imgur.com/h3MwnHD)
-![Game](https://imgur.com/ONew0Af)
+![Landing](https://imgur.com/h3MwnHD?raw=true)
+![Game](https://imgur.com/ONew0Af?raw=true)
 
 
 ##Rules
