@@ -1,16 +1,16 @@
 ((STB, $) => {
 
     $(() => {
-        const $document = $(document),
-            $input = $("#num-players"),
-            $startScreen = $(".start-screen"),
-            $gameContainer = $("#game"),
-            $tiles = $("#tiles"),
-            $diceContainer = $("#dice-container"),
-            $rollDice = $("#roll-dice"),
-            $endTurn = $("#end-turn"),
-            $endGame = $("#end-game"),
-            $scores = $("#score-board");
+        const $document = $(document);
+        const $input = $("#num-players");
+        const $startScreen = $(".start-screen");
+        const $gameContainer = $("#game");
+        const $tiles = $("#tiles");
+        const $diceContainer = $("#dice-container");
+        const $rollDice = $("#roll-dice");
+        const $endTurn = $("#end-turn");
+        const $endGame = $("#end-game");
+        const $scores = $("#score-board");
 
         $document.on('submit', event => {
             event.preventDefault();
