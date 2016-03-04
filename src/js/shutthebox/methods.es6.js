@@ -34,7 +34,7 @@
     methods.resetGame = () => {
         utils.resetTiles();
         STB.state.players = [];
-        STB.state.currentlySelected = [];
+        STB.state.currentlySelectedTiles = [];
         STB.state.currentPlayer = null;
         STB.state.onlyTileOne = false;
         STB.state.winner = null;
