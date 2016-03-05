@@ -59,7 +59,11 @@
         }
         let die_two = utils.randomNumGenerator();
         STB.state.dice = [die_one, die_two];
-        STB.state.selectableTiles = utils.getRemainingChoices(utils.getDiceTotal());
+        let diceTotal = utils.getDiceTotal();
+        STB.state.selectableTiles = utils.getRemainingChoices(diceTotal);
+        if (!utils.isSolutionPossible(diceTotal, STB.state.selectableTiles)) {
+            return "No solution possible";
+        }
         return STB.state.dice;
     };
     //end turn and return winner if all players have gone, otherwise set up next turn

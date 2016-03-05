@@ -48,7 +48,8 @@
         $rollDice.on("click", event => {
             event.stopPropagation();
             $tiles.removeClass("cannot-select");
-            STB.methods.roll();
+            //this method returns the string 'No outcome possible' if so
+            let outcome = STB.methods.roll();
             shutTiles();
             $diceContainer.empty();
             let $diceWrapper = $("<div></div>")
@@ -59,10 +60,21 @@
             });
             $diceContainer.prepend($diceWrapper);
             showSelectableTiles();
+            if (outcome === "No solution possible") {
+                endTurn();
+            }
         });
 
-        $endTurn.on("click", event => {
+        $endTurn.on("click", endTurn);
+
+        $endGame.on("click", event => {
             event.stopPropagation();
+            reset();
+            $startScreen.removeClass("slide-down");
+        })
+
+        function endTurn(event) {
+            if (event) event.stopPropagation();
             STB.methods.endTurn();
             if (STB.state.winner !== null) {
                 updateLeaderBoard();
@@ -79,13 +91,7 @@
             $diceContainer.empty();
             cleanTiles();
             updateLeaderBoard();
-        });
-
-        $endGame.on("click", event => {
-            event.stopPropagation();
-            reset();
-            $startScreen.removeClass("slide-down");
-        })
+        }
 
         function showSelectableTiles() {
             $tiles.children().each((index, tile) => {

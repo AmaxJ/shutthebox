@@ -81,4 +81,19 @@
         return dieTotal === selectionTotal;
     };
 
+    utils.isSolutionPossible = (total, arr) => {
+        let combinations = [[]];
+        arr.map(num => parseInt(num))
+           .forEach(num => {
+            combinations.forEach(combo => {
+                combinations.push(combo.concat(num));
+            });
+        });
+        for (let i=1, len=combinations.length; i<len; i++) {
+            let sum = combinations[i].reduce((a,b) => a + b);
+            if (sum === total) return true;
+        }
+        return false;
+    }
+
 })(SHUTTHEBOX);
