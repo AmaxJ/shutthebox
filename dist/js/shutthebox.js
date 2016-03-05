@@ -114,6 +114,24 @@ var SHUTTHEBOX = window.SHUTTHEBOX = {};
         });
         return dieTotal === selectionTotal;
     };
+
+    utils.isSolutionPossible = function (total, arr) {
+        var combinations = [[]];
+        arr.map(function (num) {
+            return parseInt(num);
+        }).forEach(function (num) {
+            combinations.forEach(function (combo) {
+                combinations.push(combo.concat(num));
+            });
+        });
+        for (var i = 1, len = combinations.length; i < len; i++) {
+            var sum = combinations[i].reduce(function (a, b) {
+                return a + b;
+            });
+            if (sum === total) return true;
+        }
+        return false;
+    };
 })(SHUTTHEBOX);
 "use strict";
 
@@ -153,7 +171,7 @@ var SHUTTHEBOX = window.SHUTTHEBOX = {};
     methods.resetGame = function () {
         utils.resetTiles();
         STB.state.players = [];
-        STB.state.currentlySelected = [];
+        STB.state.currentlySelectedTiles = [];
         STB.state.currentPlayer = null;
         STB.state.onlyTileOne = false;
         STB.state.winner = null;
@@ -165,8 +183,8 @@ var SHUTTHEBOX = window.SHUTTHEBOX = {};
             STB.state.turnStarted = true;
             //only allow player to roll again if their last selection was valid
         } else if (!utils.validSelection()) {
-                var diceTotal = utils.getDiceTotal();
-                alert("Your selected tiles must add up to " + diceTotal + "!");
+                var _diceTotal = utils.getDiceTotal();
+                alert("Your selected tiles must add up to " + _diceTotal + "!");
                 return;
             }
         utils.shutTiles(STB.state.currentlySelectedTiles);
@@ -178,7 +196,11 @@ var SHUTTHEBOX = window.SHUTTHEBOX = {};
         }
         var die_two = utils.randomNumGenerator();
         STB.state.dice = [die_one, die_two];
-        STB.state.selectableTiles = utils.getRemainingChoices(utils.getDiceTotal());
+        var diceTotal = utils.getDiceTotal();
+        STB.state.selectableTiles = utils.getRemainingChoices(diceTotal);
+        if (!utils.isSolutionPossible(diceTotal, STB.state.selectableTiles)) {
+            return "No solution possible";
+        }
         return STB.state.dice;
     };
     //end turn and return winner if all players have gone, otherwise set up next turn
@@ -250,7 +272,8 @@ var SHUTTHEBOX = window.SHUTTHEBOX = {};
         $rollDice.on("click", function (event) {
             event.stopPropagation();
             $tiles.removeClass("cannot-select");
-            STB.methods.roll();
+            //this method returns the string 'No outcome possible' if so
+            var outcome = STB.methods.roll();
             shutTiles();
             $diceContainer.empty();
             var $diceWrapper = $("<div></div>");
@@ -261,10 +284,21 @@ var SHUTTHEBOX = window.SHUTTHEBOX = {};
             });
             $diceContainer.prepend($diceWrapper);
             showSelectableTiles();
+            if (outcome === "No solution possible") {
+                endTurn();
+            }
         });
 
-        $endTurn.on("click", function (event) {
+        $endTurn.on("click", endTurn);
+
+        $endGame.on("click", function (event) {
             event.stopPropagation();
+            reset();
+            $startScreen.removeClass("slide-down");
+        });
+
+        function endTurn(event) {
+            if (event) event.stopPropagation();
             STB.methods.endTurn();
             if (STB.state.winner !== null) {
                 updateLeaderBoard();
@@ -281,13 +315,7 @@ var SHUTTHEBOX = window.SHUTTHEBOX = {};
             $diceContainer.empty();
             cleanTiles();
             updateLeaderBoard();
-        });
-
-        $endGame.on("click", function (event) {
-            event.stopPropagation();
-            reset();
-            $startScreen.removeClass("slide-down");
-        });
+        }
 
         function showSelectableTiles() {
             $tiles.children().each(function (index, tile) {
