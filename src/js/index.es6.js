@@ -94,9 +94,11 @@
         }
 
         function showSelectableTiles() {
+            let $currentTile;
+            let value;
             $tiles.children().each((index, tile) => {
-                let $currentTile = $(tile);
-                let value = $currentTile.attr('data-value');
+                $currentTile = $(tile);
+                value = $currentTile.attr('data-value');
                 if (STB.state.selectableTiles.indexOf(value) === -1 || !STB.state.tiles[value]) {
                     $currentTile.addClass("cannot-select");
                 } else if ($currentTile.hasClass("cannot-select")) {
@@ -106,9 +108,11 @@
         }
 
         function shutTiles() {
+            let $currentTile;
+            let value;
             $tiles.children().each((index, tile) => {
-                let $currentTile = $(tile);
-                let value = $currentTile.attr('data-value');
+                $currentTile = $(tile);
+                value = $currentTile.attr('data-value');
                 if (!STB.state.tiles[value]) {
                     $currentTile.addClass("shut");
                 }
@@ -116,18 +120,21 @@
         }
 
         function cleanTiles() {
+            let $currentTile;
             $tiles.children().each((index, tile) => {
-                let $currentTile = $(tile);
+                $currentTile = $(tile);
                 $currentTile.removeClass();
                 $currentTile.addClass("number");
             });
         }
 
         function updateLeaderBoard() {
+            let $scoreList;
+            let $playerEntry;
             $scores.empty();
-            let $scoreList = $("<div></div>");
+            $scoreList = $("<div></div>");
             STB.state.players.forEach(player => {
-                let $playerEntry = $(`<h3>${player.name} - ${player.score}</h3>`);
+                $playerEntry = $(`<h3>${player.name} - ${player.score}</h3>`);
                 if (player === STB.state.currentPlayer) {
                     $playerEntry.addClass("current-player")
                 }

@@ -32,6 +32,7 @@
     utils.getRemainingChoices = (dieTotal) => {
         let selectedTiles = STB.state.currentlySelectedTiles;
         let selectedAmt;
+        let difference;
         if (selectedTiles.length === 0) {
             selectedAmt = 0;
         } else {
@@ -39,7 +40,7 @@
                 .map(tile => parseInt(tile))
                 .reduce((a, b) => a + b);
         }
-        let difference = dieTotal - selectedAmt;
+        difference = dieTotal - selectedAmt;
         return utils.keys.filter(tile => {
             return STB.state.tiles[tile] && parseInt(tile) <= difference && selectedTiles.indexOf(tile) === -1;
         });
@@ -83,6 +84,7 @@
 
     utils.isSolutionPossible = (total, arr) => {
         let combinations = [[]];
+        let sum;
         arr.map(num => parseInt(num))
            .forEach(num => {
             combinations.forEach(combo => {
@@ -90,7 +92,7 @@
             });
         });
         for (let i=1, len=combinations.length; i<len; i++) {
-            let sum = combinations[i].reduce((a,b) => a + b);
+            sum = combinations[i].reduce((a,b) => a + b);
             if (sum === total) return true;
         }
         return false;
