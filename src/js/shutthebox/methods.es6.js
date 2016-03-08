@@ -42,24 +42,27 @@
     };
     //On the roll is when we lock in the selection from the last roll
     methods.roll = () => {
+        let diceTotal;
+        let die_one;
+        let die_two;
         if (!STB.state.turnStarted) {
             STB.state.turnStarted = true;
             //only allow player to roll again if their last selection was valid
         } else if (!utils.validSelection()) {
-            let diceTotal = utils.getDiceTotal();
+            diceTotal = utils.getDiceTotal();
             alert(`Your selected tiles must add up to ${diceTotal}!`);
             return;
         }
         utils.shutTiles(STB.state.currentlySelectedTiles);
         STB.state.currentlySelectedTiles = [];
-        let die_one = utils.randomNumGenerator();
+        die_one = utils.randomNumGenerator();
         if (STB.state.onlyTileOne) {
             STB.state.dice = [die_one];
             return STB.state.dice;
         }
-        let die_two = utils.randomNumGenerator();
+        die_two = utils.randomNumGenerator();
         STB.state.dice = [die_one, die_two];
-        let diceTotal = utils.getDiceTotal();
+        diceTotal = utils.getDiceTotal();
         STB.state.selectableTiles = utils.getRemainingChoices(diceTotal);
         if (!utils.isSolutionPossible(diceTotal, STB.state.selectableTiles)) {
             return "No solution possible";
